@@ -123,7 +123,8 @@ RUN mkdir -p /home/lego_carla/src && cd /home/lego_carla/src \
     && source ./install/setup.bash \
     && echo "source /home/lego_carla/install/setup.bash" >> ~/.bashrc 
 
-ARG CACHEBUST=14
+ARG CACHEBUST=1
+
 RUN mkdir -p /home/lego_carla/src && cd /home/lego_carla/src \
     && git clone https://github.com/JiapengZhao1/carla-gym-test.git
 

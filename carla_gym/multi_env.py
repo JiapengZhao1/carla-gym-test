@@ -158,7 +158,7 @@ class MultiActorCarlaEnv:
     def __init__(
         self,
         configs: dict = None,
-        xml_config_path: str = "./carla_gym/scenarios/carla_gym.scenarios.default_1c_town01.xml",
+        xml_config_path: str = "/home/lego_carla/src/carla-gym-test/carla_gym/scenarios/default_1c_town01.xml",
         max_steps: int = 500,
         render_mode: str = None,
         maps_path: str = "/Game/Carla/Maps/",

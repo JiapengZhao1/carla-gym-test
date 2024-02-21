@@ -57,7 +57,7 @@ CARLA_OUT_PATH = os.environ.get("CARLA_OUT", os.path.expanduser("~/carla_out"))
 if CARLA_OUT_PATH and not os.path.exists(CARLA_OUT_PATH):
     os.makedirs(CARLA_OUT_PATH)
 # Set this to the path of your Carla binary
-SERVER_BINARY = os.environ.get("CARLA_SERVER", os.path.expanduser("~/software/CARLA_0.9.13/CarlaUE4.sh"))
+SERVER_BINARY = os.environ.get("CARLA_SERVER", os.path.expanduser("/home/CARLA_0.9.15/CarlaUE4.sh"))
 assert os.path.exists(SERVER_BINARY), (
     "Make sure CARLA_SERVER environment variable is set & is pointing to the "
     "CARLA server startup script (CarlaUE4.sh). Refer to the README file/docs."

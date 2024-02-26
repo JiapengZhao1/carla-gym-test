@@ -32,43 +32,6 @@ from carla_gym.multi_env import MultiActorCarlaEnv, MultiActorCarlaEnvPZ, DISCRE
 tf1, tf, tfv = try_import_tf()
 torch, nn = try_import_torch()
 
-parser = argparse.ArgumentParser()
-parser.add_argument(
-    "--run", type=str, default="PPO", help="The RLlib-registered algorithm to use."
-)
-parser.add_argument(
-    "--framework",
-    choices=["tf", "tf2", "torch"],
-    default="torch",
-    help="The DL framework specifier.",
-)
-parser.add_argument(
-    "--as-test",
-    action="store_true",
-    help="Whether this script should be run as a test: --stop-reward must "
-    "be achieved within --stop-timesteps AND --stop-iters.",
-)
-parser.add_argument(
-    "--stop-iters", type=int, default=50, help="Number of iterations to train."
-)
-parser.add_argument(
-    "--stop-timesteps", type=int, default=100000, help="Number of timesteps to train."
-)
-parser.add_argument(
-    "--stop-reward", type=float, default=0.1, help="Reward at which we stop training."
-)
-parser.add_argument(
-    "--no-tune",
-    action="store_true",
-    help="Run without Tune using a manual train loop instead. In this case,"
-    "use PPO without grid search and no TensorBoard.",
-)
-parser.add_argument(
-    "--local-mode",
-    action="store_true",
-    help="Init Ray in local mode for easier debugging.",
-)
-
 
 if __name__ == "__main__":
     argparser = argparse.ArgumentParser(description="CARLA Manual Control Client")
@@ -95,7 +58,7 @@ if __name__ == "__main__":
         # or "corridor" if registered above
         .environment(MultiActorCarlaEnvPZ)
         .framework("torch")
-        #.rollouts(num_rollout_workers=1)
+        .rollouts(num_rollout_workers=1)
         # Use GPUs iff `RLLIB_NUM_GPUS` env var set to > 0.
         .resources(num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", "0")))
     )
@@ -106,7 +69,7 @@ if __name__ == "__main__":
         #"episode_reward_mean": args.stop_reward,
     #}
 
-    if True:
+    if False:
         # manual training with train loop using PPO and fixed learning rate
         #if args.run != "PPO":
             #raise ValueError("Only support --run PPO with --no-tune.")
@@ -129,7 +92,7 @@ if __name__ == "__main__":
         # automated run with Tune and grid search and TensorBoard
         print("Training automatically with Ray Tune")
         tuner = tune.Tuner(
-            args.run,
+            "PPO",
             param_space=config.to_dict(),
             run_config=air.RunConfig(),
         )

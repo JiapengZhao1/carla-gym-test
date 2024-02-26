@@ -113,9 +113,9 @@ RUN pip3 install torch torchvision torchaudio \
 #RUN pip install rosnumpy
 
 
-ARG CACHEBUST=754
+ARG CACHEBUST=32
 RUN mkdir -p /home/lego_carla/src && cd /home/lego_carla/src \
-    && git clone https://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@github.com/UCR-CISL/LegoCarla.git \   
+    && git clone https://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@github.com/UCR-CISL/LegoCarla.git \   
     && cd .. \
     && source /opt/ros/foxy/setup.bash \
     && rosdep update \
@@ -127,7 +127,9 @@ RUN mkdir -p /home/lego_carla/src && cd /home/lego_carla/src \
 ARG CACHEBUST=234
 
 RUN mkdir -p /home/lego_carla/src && cd /home/lego_carla/src \
-    && git clone https://github.com/JiapengZhao1/carla-gym-test.git
+    && git clone https://github.com/JiapengZhao1/carla-gym-test.git \
+    && mv /home/lego_carla/src/carla-gym-test /home/lego_carla/src/carla-gym \
+    && echo "export PYTHONPATH=\$PYTHONPATH:\/home/lego_carla/src/carla-gym" >> ~/.bashrc 
 
-RUN cd /home/lego_carla/src/carla-gym-test \
+RUN cd /home/lego_carla/src/carla-gym \
     && pip3 install -r requirements.txt 

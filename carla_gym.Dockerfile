@@ -79,7 +79,7 @@ RUN sudo apt install ros-foxy-derived-object-msgs \
     && sudo apt-get install ros-foxy-sensor-msgs-py
 
 RUN sudo apt-get upgrade -y \
-    && sudo apt-get install vim
+    && sudo apt-get install vim -y
 
 ### Install lego_carla
 RUN useradd -ms /bin/bash lego_carla \

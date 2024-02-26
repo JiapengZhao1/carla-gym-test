@@ -83,7 +83,7 @@ class SimpleCorridor(gym.Env):
 
     def reset(self, *, seed=None, options=None):
         random.seed(seed)
-        self.cur_pos = 0
+        self.cur_pos = 0.0
         return [self.cur_pos], {}
 
     def step(self, action):

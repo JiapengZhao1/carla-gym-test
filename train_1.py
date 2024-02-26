@@ -79,7 +79,7 @@ if __name__ == "__main__":
     args = vars(argparser.parse_args())
     args["discrete_action_space"] = True
     # The scenario xml config should have "enable_planner" flag
-    env = MultiActorCarlaEnvPZ(**args)
+    #env = MultiActorCarlaEnvPZ(**args)
     # otherwise for PZ AEC: env = carla_gym.env(**args)
 
     print(f"Running with following CLI options: {args}")

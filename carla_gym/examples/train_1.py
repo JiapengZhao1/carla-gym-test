@@ -27,7 +27,7 @@ from ray.rllib.utils.test_utils import check_learning_achieved
 from ray.tune.logger import pretty_print
 from ray.tune.registry import get_trainable_cls
 
-from carla_gym.multi_env import MultiActorCarlaEnvPZ, DISCRETE_ACTIONS
+from carla_gym.multi_env import MultiActorCarlaEnv, MultiActorCarlaEnvPZ, DISCRETE_ACTIONS
 
 tf1, tf, tfv = try_import_tf()
 torch, nn = try_import_torch()
@@ -95,7 +95,7 @@ if __name__ == "__main__":
         # or "corridor" if registered above
         .environment(MultiActorCarlaEnvPZ)
         .framework("torch")
-        .rollouts(num_rollout_workers=1)
+        #.rollouts(num_rollout_workers=1)
         # Use GPUs iff `RLLIB_NUM_GPUS` env var set to > 0.
         .resources(num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", "0")))
     )
@@ -106,11 +106,11 @@ if __name__ == "__main__":
         #"episode_reward_mean": args.stop_reward,
     #}
 
-    if args.no_tune:
+    if True:
         # manual training with train loop using PPO and fixed learning rate
-        if args.run != "PPO":
-            raise ValueError("Only support --run PPO with --no-tune.")
-        print("Running manual train loop without Ray Tune.")
+        #if args.run != "PPO":
+            #raise ValueError("Only support --run PPO with --no-tune.")
+        #print("Running manual train loop without Ray Tune.")
         # use fixed learning rate instead of grid search (needs tune)
         config.lr = 1e-3
         algo = config.build()

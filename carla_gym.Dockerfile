@@ -115,7 +115,7 @@ RUN pip3 install torch torchvision torchaudio \
 
 ARG CACHEBUST=754
 RUN mkdir -p /home/lego_carla/src && cd /home/lego_carla/src \
-    && git clone https://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@github.com/UCR-CISL/LegoCarla.git \   
+    && git clone https://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@github.com/UCR-CISL/LegoCarla.git \   
     && cd .. \
     && source /opt/ros/foxy/setup.bash \
     && rosdep update \

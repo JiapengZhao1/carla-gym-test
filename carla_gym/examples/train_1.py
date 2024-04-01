@@ -9,7 +9,7 @@ You can visualize experiment results in ~/ray_results using TensorBoard.
 
 Run example with defaults:
 $ python custom_env.py
-For CLI options:
+For CLI options: 
 $ python custom_env.py --help
 """
 import argparse
@@ -50,17 +50,17 @@ if __name__ == "__main__":
     ray.init()
 
     # Can also register the env creator function explicitly with:
-    # register_env("corridor", lambda config: SimpleCorridor(config))
+    #register_env("MultiActorCarlaEnvPZ", lambda config: MultiActorCarlaEnvPZ(config))
 
     config = (
         get_trainable_cls("PPO")
-        .get_default_config()
+        #.get_default_config()
         # or "corridor" if registered above
-        .environment(MultiActorCarlaEnvPZ)
+        .environment(MultiActorCarlaEnvPZ, env_config={"xml_config_path": "/home/lego_carla/src/carla-gym/carla_gym/examples/configs.xml"})
         .framework("torch")
-        .rollouts(num_rollout_workers=1)
+        .rollouts(num_rollout_workers=0)
         # Use GPUs iff `RLLIB_NUM_GPUS` env var set to > 0.
-        .resources(num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", "0")))
+        .resources(num_gpus=int(os.environ.get("RLLIB_NUM_GPUS", "1")))
     )
 
     #stop = {
